@@ -13,7 +13,7 @@ var usuario = {
 
 socket.on('connect', function() {
     socket.emit('entrarChat', usuario, function(resp) {
-        console.log('Respuesta Server', resp);
+        renderizarUsuarios(resp);
     });
 });
 
@@ -42,14 +42,13 @@ socket.on('enviarMensaje', function(mensaje) {
 
 
 socket.on('crearMensaje', function(mensaje) {
-
-    console.log('Servidor:', mensaje);
-
+    renderizarMensajes(mensaje, false);
+    scrollBottom();
 });
 
 //cuando un usuario entra o sale del chat 
 socket.on('listaPersonas', function(personas) {
-    console.log('Servidor:', personas);
+    renderizarUsuarios(personas);
 });
 
 //mensajes Provados 
